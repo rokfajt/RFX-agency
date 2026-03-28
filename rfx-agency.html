@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RFX Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #ffffff;
+    --off-white: #f5f5f7;
+    --light-grey: #e8e8ed;
+    --mid-grey: #a1a1a6;
+    --dark-grey: #6e6e73;
+    --charcoal: #1d1d1f;
+    --black: #000000;
+    --accent: #1d1d1f;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--charcoal);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    height: 52px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+  }
+  .nav-logo {
+    font-size: 17px; font-weight: 600; letter-spacing: -0.02em;
+    color: var(--black); text-decoration: none;
+  }
+  .nav-center { display: flex; gap: 36px; }
+  .nav-center a {
+    font-size: 13px; font-weight: 400; color: var(--charcoal);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-center a:hover { color: var(--mid-grey); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+
+  /* Language Switcher */
+  .lang-switcher {
+    display: flex; gap: 4px; align-items: center;
+  }
+  .lang-btn {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    color: var(--dark-grey); background: none; border: none;
+    padding: 4px 8px; cursor: pointer; transition: color 0.2s;
+    text-transform: uppercase;
+  }
+  .lang-btn:hover, .lang-btn.active { color: var(--black); }
+  .lang-sep { color: var(--light-grey); font-size: 11px; }
+
+  /* Instagram */
+  .ig-link {
+    display: flex; align-items: center;
+    color: var(--charcoal); text-decoration: none; transition: opacity 0.2s;
+  }
+  .ig-link:hover { opacity: 0.6; }
+  .ig-link svg { width: 18px; height: 18px; }
+
+  .nav-apply {
+    font-size: 13px; font-weight: 500;
+    background: var(--black); color: var(--white);
+    padding: 8px 18px; border-radius: 20px;
+    text-decoration: none; transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-apply:hover { background: #333; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--black);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 100px 40px 80px;
+    position: relative; overflow: hidden;
+  }
+
+  /* Subtle gradient orb */
+  .hero::before {
+    content: '';
+    position: absolute; width: 900px; height: 900px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 6px 16px; border-radius: 20px;
+    margin-bottom: 48px;
+    opacity: 0; animation: fadeUp 0.9s 0.1s forwards;
+  }
+
+  .hero-name {
+    font-weight: 900; letter-spacing: -0.03em;
+    color: var(--white); line-height: 0.85;
+    margin-bottom: 52px;
+    width: 100%;
+    text-align: center;
+    opacity: 0; animation: fadeUp 0.9s 0.2s forwards;
+  }
+  .hero-name span { display: block; }
+  .hero-name .rfx {
+    font-size: 28vw;
+    line-height: 0.85;
+  }
+  .hero-name .agency {
+    font-size: 9.5vw;
+    font-weight: 200; letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+  }
+
+  .hero-headline {
+    font-size: clamp(20px, 3vw, 34px);
+    font-weight: 300; line-height: 1.3;
+    color: rgba(255,255,255,0.85);
+    max-width: 680px; margin: 0 auto 24px;
+    opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+  }
+
+  .hero-sub {
+    font-size: 17px; font-weight: 300; line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+    max-width: 540px; margin: 0 auto 56px;
+    opacity: 0; animation: fadeUp 0.9s 0.45s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.9s 0.55s forwards;
+  }
+  .btn-white {
+    font-size: 15px; font-weight: 500;
+    background: var(--white); color: var(--black);
+    padding: 14px 32px; border-radius: 30px;
+    text-decoration: none; transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-white:hover { background: #e0e0e0; transform: scale(1.02); }
+  .btn-outline {
+    font-size: 15px; font-weight: 400;
+    background: transparent; color: rgba(255,255,255,0.7);
+    padding: 14px 32px; border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+    text-decoration: none; transition: all 0.25s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+  .hero-scroll-indicator {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeIn 1s 1.2s forwards;
+  }
+  .scroll-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    animation: scrollBounce 2s infinite;
+  }
+
+  /* ── WHAT WE DO ── */
+  .what-we-do {
+    background: var(--off-white);
+    padding: 120px 40px;
+    text-align: center;
+  }
+  .section-eyebrow {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid-grey);
+    margin-bottom: 20px;
+  }
+  .section-title-big {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 600; letter-spacing: -0.03em;
+    line-height: 1.05; color: var(--black);
+    max-width: 780px; margin: 0 auto 32px;
+  }
+  .section-body {
+    font-size: 19px; font-weight: 300; line-height: 1.7;
+    color: var(--dark-grey); max-width: 620px; margin: 0 auto;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    background: var(--white);
+    padding: 120px 40px;
+  }
+  .services-inner { max-width: 1100px; margin: 0 auto; }
+  .services-header { text-align: center; margin-bottom: 72px; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--light-grey);
+    border-radius: 20px; overflow: hidden;
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 52px 48px;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--off-white); }
+
+  .service-num {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid-grey);
+    margin-bottom: 28px;
+  }
+  .service-title {
+    font-size: 26px; font-weight: 600; letter-spacing: -0.02em;
+    color: var(--black); margin-bottom: 16px; line-height: 1.2;
+  }
+  .service-desc {
+    font-size: 15px; font-weight: 300; line-height: 1.75;
+    color: var(--dark-grey);
+  }
+
+  /* ── WHY ── */
+  .why {
+    background: var(--black);
+    padding: 120px 40px;
+    text-align: center;
+    color: var(--white);
+  }
+  .why-inner { max-width: 900px; margin: 0 auto; }
+  .why .section-eyebrow { color: rgba(255,255,255,0.4); }
+  .why .section-title-big { color: var(--white); }
+  .why .section-body { color: rgba(255,255,255,0.5); margin-bottom: 72px; }
+
+  .why-list {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 2px; background: rgba(255,255,255,0.07);
+    border-radius: 20px; overflow: hidden;
+    margin-bottom: 80px;
+  }
+  .why-item {
+    background: #111;
+    padding: 44px 48px;
+    text-align: left;
+    display: flex; align-items: flex-start; gap: 20px;
+  }
+  .why-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .why-item-text h4 {
+    font-size: 17px; font-weight: 600; color: var(--white);
+    margin-bottom: 6px;
+  }
+  .why-item-text p {
+    font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  .why-focus {
+    font-size: 20px; font-weight: 300; line-height: 1.75;
+    color: rgba(255,255,255,0.5);
+  }
+  .why-focus strong { color: var(--white); font-weight: 500; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--off-white);
+    padding: 140px 40px;
+    text-align: center;
+  }
+  .cta-section .section-title-big { margin-bottom: 24px; }
+  .cta-section .section-body { margin-bottom: 52px; }
+  .btn-black {
+    font-size: 17px; font-weight: 500;
+    background: var(--black); color: var(--white);
+    padding: 18px 48px; border-radius: 40px;
+    text-decoration: none; transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-black:hover { background: #222; transform: scale(1.03); }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--white);
+    padding: 120px 40px;
+  }
+  .contact-inner {
+    max-width: 600px; margin: 0 auto;
+    text-align: center;
+  }
+  .contact-inner .section-title-big { font-size: clamp(28px, 4vw, 48px); margin-bottom: 16px; }
+  .contact-inner .section-body { margin-bottom: 52px; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-field {
+    display: flex; flex-direction: column; gap: 6px; text-align: left;
+  }
+  .form-field label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--dark-grey);
+  }
+  .form-field input, .form-field textarea {
+    font-family: inherit; font-size: 15px; font-weight: 300;
+    color: var(--black); background: var(--off-white);
+    border: 1.5px solid var(--light-grey);
+    border-radius: 12px; padding: 14px 18px;
+    outline: none; transition: border-color 0.2s;
+    resize: none;
+  }
+  .form-field input:focus, .form-field textarea:focus {
+    border-color: var(--charcoal);
+  }
+  .form-field textarea { min-height: 120px; }
+
+  .form-submit {
+    font-family: inherit; font-size: 15px; font-weight: 500;
+    background: var(--black); color: var(--white);
+    border: none; border-radius: 30px;
+    padding: 16px; cursor: pointer;
+    transition: background 0.2s; margin-top: 8px;
+  }
+  .form-submit:hover { background: #333; }
+  .form-success {
+    display: none; text-align: center;
+    padding: 32px; background: var(--off-white);
+    border-radius: 16px; color: var(--dark-grey);
+  }
+  .form-success strong { display: block; font-size: 18px; color: var(--black); margin-bottom: 8px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--off-white);
+    border-top: 1px solid var(--light-grey);
+    padding: 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo { font-size: 15px; font-weight: 600; color: var(--black); }
+  .footer-copy { font-size: 13px; color: var(--mid-grey); }
+  .footer-ig {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--dark-grey); text-decoration: none;
+    font-size: 13px; transition: color 0.2s;
+  }
+  .footer-ig:hover { color: var(--black); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+  .reveal-d4 { transition-delay: 0.4s; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-center { display: none; }
+    .hero { padding: 80px 20px 60px; }
+    .what-we-do, .services, .why, .cta-section, .contact { padding: 80px 20px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-list { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 32px 20px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">RFX</a>
+  <div class="nav-center">
+    <a href="#what" data-i18n="nav_what">What We Do</a>
+    <a href="#services" data-i18n="nav_services">Services</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" onclick="setLang('sl')">SLO</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" onclick="setLang('it')">ITA</button>
+    </div>
+    <a href="https://instagram.com/the_rokfajttt" target="_blank" class="ig-link" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a href="#contact" class="nav-apply" data-i18n="nav_apply">Apply Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag" data-i18n="hero_tag">Marketing Agency · Digital Products</div>
+  <h1 class="hero-name">
+    <span class="rfx">RFX</span>
+    <span class="agency">AGENCY</span>
+  </h1>
+  <p class="hero-headline" data-i18n="hero_headline">We Turn Audiences Into Digital Businesses</p>
+  <p class="hero-sub" data-i18n="hero_sub">You have the audience. We build the system that makes it generate revenue.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn-white" data-i18n="hero_cta1">Apply For Partnership</a>
+    <a href="#services" class="btn-outline" data-i18n="hero_cta2">Our Services</a>
+  </div>
+  <div class="hero-scroll-indicator"><div class="scroll-dot"></div></div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what-we-do" id="what">
+  <p class="section-eyebrow reveal" data-i18n="what_eyebrow">What We Do</p>
+  <h2 class="section-title-big reveal reveal-d1" data-i18n="what_title">Audience is your asset.<br>We build the business around it.</h2>
+  <p class="section-body reveal reveal-d2" data-i18n="what_body">At RFX Agency, we partner exclusively with creators who have real traction. We design, build and launch their entire digital product operation — from the product itself to the infrastructure and sales systems that make it scale.</p>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <p class="section-eyebrow reveal" data-i18n="serv_eyebrow">Our Services</p>
+      <h2 class="section-title-big reveal reveal-d1" data-i18n="serv_title">Four pillars.<br>One complete system.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-d1">
+        <p class="service-num">01</p>
+        <h3 class="service-title" data-i18n="s1_title">Digital Product Creation</h3>
+        <p class="service-desc" data-i18n="s1_desc">We help design and structure profitable digital products based on your audience and niche.</p>
+      </div>
+      <div class="service-card reveal reveal-d2">
+        <p class="service-num">02</p>
+        <h3 class="service-title" data-i18n="s2_title">Platform Setup</h3>
+        <p class="service-desc" data-i18n="s2_desc">We build and launch your digital product ecosystem on Whop.</p>
+      </div>
+      <div class="service-card reveal reveal-d3">
+        <p class="service-num">03</p>
+        <h3 class="service-title" data-i18n="s3_title">Monetisation Strategy</h3>
+        <p class="service-desc" data-i18n="s3_desc">We implement pricing, offers and sales structures designed to maximise revenue.</p>
+      </div>
+      <div class="service-card reveal reveal-d4">
+        <p class="service-num">04</p>
+        <h3 class="service-title" data-i18n="s4_title">Growth Systems</h3>
+        <p class="service-desc" data-i18n="s4_desc">From funnels to automated sales processes, we create the systems that scale your product.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CREATORS -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <p class="section-eyebrow reveal" data-i18n="why_eyebrow">Why Creators Work With Us</p>
+    <h2 class="section-title-big reveal reveal-d1" data-i18n="why_title">Your job is content.<br>Our job is everything else.</h2>
+    <p class="section-body reveal reveal-d2" data-i18n="why_body">Most creators waste months trying to figure out tech, pricing and platforms. We've already solved all of it. You bring the audience — we bring the business.</p>
+    <div class="why-list">
+      <div class="why-item reveal reveal-d1">
+        <div class="why-icon">📦</div>
+        <div class="why-item-text">
+          <h4 data-i18n="wi1_title">Product Creation</h4>
+          <p data-i18n="wi1_desc">We design digital products that match your audience's needs and your brand's positioning.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-d2">
+        <div class="why-icon">⚙️</div>
+        <div class="why-item-text">
+          <h4 data-i18n="wi2_title">Platform Setup</h4>
+          <p data-i18n="wi2_desc">Full Whop ecosystem — configured, branded and ready to sell from day one.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-d3">
+        <div class="why-icon">💰</div>
+        <div class="why-item-text">
+          <h4 data-i18n="wi3_title">Monetisation Strategy</h4>
+          <p data-i18n="wi3_desc">Offer stacks, pricing tiers and upsell flows engineered to maximise lifetime value.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-d4">
+        <div class="why-icon">🔧</div>
+        <div class="why-item-text">
+          <h4 data-i18n="wi4_title">Backend Infrastructure</h4>
+          <p data-i18n="wi4_desc">Automations, funnels and delivery systems that operate 24/7 without your involvement.</p>
+        </div>
+      </div>
+    </div>
+    <p class="why-focus reveal" data-i18n="why_focus">The result: a digital business that grows while you focus on <strong>content and audience.</strong></p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="section-eyebrow reveal" data-i18n="cta_eyebrow">Limited Spots Available</p>
+  <h2 class="section-title-big reveal reveal-d1" data-i18n="cta_title">Ready to build your<br>digital product?</h2>
+  <p class="section-body reveal reveal-d2" data-i18n="cta_body">We work with a select number of creators each month. If you have an engaged audience and a vision, apply below — we'll be in touch within 48 hours.</p>
+  <br><br>
+  <a href="#contact" class="btn-black reveal reveal-d3" data-i18n="cta_btn">Apply For Partnership</a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <p class="section-eyebrow reveal" data-i18n="contact_eyebrow">Contact Us</p>
+    <h2 class="section-title-big reveal reveal-d1" data-i18n="contact_title">Get In Touch</h2>
+    <p class="section-body reveal reveal-d2" data-i18n="contact_body">Tell us about your audience and goals. We'll get back to you within 24 hours.</p>
+    <div class="contact-form reveal reveal-d3" id="contactForm">
+      <div class="form-row">
+        <div class="form-field">
+          <label data-i18n="form_name">Your Name</label>
+          <input type="text" id="fname" placeholder="Creator Name" />
+        </div>
+        <div class="form-field">
+          <label data-i18n="form_email">Gmail Address</label>
+          <input type="email" id="femail" placeholder="you@gmail.com" />
+        </div>
+      </div>
+      <div class="form-field">
+        <label data-i18n="form_msg">Message</label>
+        <textarea id="fmessage" placeholder="Tell us about your audience, niche, and what you want to build..."></textarea>
+      </div>
+      <button class="form-submit" onclick="sendMessage()" data-i18n="form_send">Send Message</button>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <strong data-i18n="form_success_title">Message Sent! 🎉</strong>
+      <span data-i18n="form_success_body">We'll be in touch within 24 hours.</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RFX AGENCY</div>
+  <p class="footer-copy" data-i18n="footer_copy">© 2024 RFX Agency. All rights reserved.</p>
+  <a href="https://instagram.com/the_rokfajttt" target="_blank" class="footer-ig">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+    </svg>
+    @the_rokfajttt
+  </a>
+</footer>
+
+<script>
+// ── TRANSLATIONS ──
+const translations = {
+  en: {
+    nav_what: "What We Do", nav_services: "Services", nav_contact: "Contact", nav_apply: "Apply Now",
+    hero_tag: "Marketing Agency · Digital Products",
+    hero_headline: "We Turn Audiences Into Digital Businesses",
+    hero_sub: "You have the audience. We build the system that makes it generate revenue.",
+    hero_cta1: "Apply For Partnership", hero_cta2: "Our Services",
+    what_eyebrow: "What We Do",
+    what_title: "Audience is your asset.<br>We build the business around it.",
+    what_body: "At RFX Agency, we partner exclusively with creators who have real traction. We design, build and launch their entire digital product operation — from the product itself to the infrastructure and sales systems that make it scale.",
+    serv_eyebrow: "Our Services", serv_title: "Four pillars.<br>One complete system.",
+    s1_title: "Digital Product Creation", s1_desc: "We design and structure profitable digital products matched precisely to your audience's needs and your niche's demand.",
+    s2_title: "Platform Setup", s2_desc: "We build and launch your full digital product ecosystem on Whop — configured, branded and ready to generate revenue.",
+    s3_title: "Monetisation Strategy", s3_desc: "Offer stacks, pricing tiers and upsell flows engineered to maximise customer lifetime value from day one.",
+    s4_title: "Growth Systems", s4_desc: "Automated funnels and sales processes that work around the clock — so your product scales without scaling your workload.",
+    why_eyebrow: "Why Creators Work With Us",
+    why_title: "Your job is content.<br>Our job is everything else.",
+    why_body: "Most creators waste months figuring out tech, pricing and platforms. We've already solved all of it. You bring the audience — we bring the business.",
+    wi1_title: "Product Creation", wi1_desc: "We design digital products that match your audience's needs and your brand's positioning.",
+    wi2_title: "Platform Setup", wi2_desc: "Full Whop ecosystem — configured, branded and ready to sell from day one.",
+    wi3_title: "Monetisation Strategy", wi3_desc: "Offer stacks, pricing tiers and upsell flows engineered to maximise lifetime value.",
+    wi4_title: "Backend Infrastructure", wi4_desc: "Automations, funnels and delivery systems that operate 24/7 without your involvement.",
+    why_focus: "The result: a digital business that grows while you focus on <strong>content and audience.</strong>",
+    cta_eyebrow: "Limited Spots Available",
+    cta_title: "Ready to build your<br>digital product?",
+    cta_body: "We work with a select number of creators each month. If you have an engaged audience and a vision, apply below — we'll be in touch within 48 hours.",
+    cta_btn: "Apply For Partnership",
+    contact_eyebrow: "Contact Us", contact_title: "Get In Touch",
+    contact_body: "Tell us about your audience and goals. We'll get back to you within 24 hours.",
+    form_name: "Your Name", form_email: "Gmail Address", form_msg: "Message",
+    form_send: "Send Message",
+    form_success_title: "Message Sent! 🎉", form_success_body: "We'll be in touch within 24 hours.",
+    footer_copy: "© 2024 RFX Agency. All rights reserved."
+  },
+  sl: {
+    nav_what: "Kaj Delamo", nav_services: "Storitve", nav_contact: "Kontakt", nav_apply: "Prijavi Se",
+    hero_tag: "Marketinška Agencija · Digitalni Produkti",
+    hero_headline: "Publiko Spremenimo v Digitalno Podjetje",
+    hero_sub: "Vi imate publiko. Mi zgradimo sistem, ki jo monetizira.",
+    hero_cta1: "Prijavi se za Partnerstvo", hero_cta2: "Naše Storitve",
+    what_eyebrow: "Kaj Delamo",
+    what_title: "Publika je vaše sredstvo. Mi zgradimo podjetje okoli nje.",
+    what_body: "Pri RFX Agency sodelujemo izključno z ustvarjalci, ki imajo resnično vplivnost. Načrtujemo, zgradimo in zaženemo celotno digitalno produktno operacijo — od samega produkta do infrastrukture in prodajnih sistemov.",
+    serv_eyebrow: "Naše Storitve", serv_title: "Štirje stebri. En celovit sistem.",
+    s1_title: "Ustvarjanje Digitalnih Produktov", s1_desc: "Načrtujemo in strukturiramo digitalne produkte, prilagojene natanko potrebam vaše publike in povpraševanju vaše niše.",
+    s2_title: "Postavitev Platforme", s2_desc: "Zgradimo in zaženemo vaš celoten ekosistem digitalnih produktov na Whopu — konfiguriran, znamčen in pripravljen za prihodke.",
+    s3_title: "Strategija Monetizacije", s3_desc: "Paketi ponudb, cenovni razredi in prodajni tokovi za maksimizacijo vrednosti stranke od prvega dne.",
+    s4_title: "Sistemi Rasti", s4_desc: "Avtomatizirani lijaki in prodajni procesi, ki delujejo 24/7 — vaš produkt raste brez dodatnega dela.",
+    why_eyebrow: "Zakaj Ustvarjalci Delajo Z Nami",
+    why_title: "Vaše delo je vsebina. Naše je vse ostalo.",
+    why_body: "Večina ustvarjalcev zapravi mesece za reševanje tehničnih zadev, cen in platform. Mi smo to že rešili. Vi prinesete publiko — mi prinesemo podjetje.",
+    wi1_title: "Ustvarjanje Produktov", wi1_desc: "Načrtujemo digitalne produkte, ki ustrezajo potrebam vaše publike in pozicioniranju vaše znamke.",
+    wi2_title: "Postavitev Platforme", wi2_desc: "Celoten ekosistem Whop — konfiguriran, znamčen in pripravljen za prodajo od prvega dne.",
+    wi3_title: "Strategija Monetizacije", wi3_desc: "Paketi ponudb, cenovni razredi in upsell tokovi za maksimizacijo vrednosti stranke.",
+    wi4_title: "Zaledna Infrastruktura", wi4_desc: "Avtomatizacije, lijaki in sistemi dostave, ki delujejo 24/7 brez vašega posredovanja.",
+    why_focus: "Rezultat: digitalno podjetje, ki raste, medtem ko se vi osredotočate na <strong>vsebino in publiko.</strong>",
+    cta_eyebrow: "Omejena Mesta",
+    cta_title: "Pripravljeni zgraditi digitalni produkt?",
+    cta_body: "Vsak mesec sodelujemo z izbranim številom ustvarjalcev. Če imate angažirano publiko in vizijo, se prijavite — javili se vam bomo v 48 urah.",
+    cta_btn: "Prijavi se za Partnerstvo",
+    contact_eyebrow: "Kontakt", contact_title: "Pišite Nam",
+    contact_body: "Povejte nam o svoji publiki in ciljih. Odgovorili bomo v 24 urah.",
+    form_name: "Vaše Ime", form_email: "Gmail Naslov", form_msg: "Sporočilo",
+    form_send: "Pošlji Sporočilo",
+    form_success_title: "Sporočilo Poslano! 🎉", form_success_body: "Javili se vam bomo v 24 urah.",
+    footer_copy: "© 2024 RFX Agency. Vse pravice pridržane."
+  },
+  it: {
+    nav_what: "Cosa Facciamo", nav_services: "Servizi", nav_contact: "Contatti", nav_apply: "Candidati",
+    hero_tag: "Agenzia di Marketing · Prodotti Digitali",
+    hero_headline: "Trasformiamo il Pubblico in Business Digitale",
+    hero_sub: "Hai già il pubblico. Noi costruiamo il sistema che lo monetizza.",
+    hero_cta1: "Candidati per Partnership", hero_cta2: "I Nostri Servizi",
+    what_eyebrow: "Cosa Facciamo",
+    what_title: "Il pubblico è il tuo asset. Noi costruiamo il business intorno ad esso.",
+    what_body: "In RFX Agency collaboriamo esclusivamente con creator che hanno una vera trazione. Progettiamo, costruiamo e lanciamo l'intera operazione di prodotto digitale — dal prodotto stesso all'infrastruttura e ai sistemi di vendita che lo fanno scalare.",
+    serv_eyebrow: "I Nostri Servizi", serv_title: "Quattro pilastri. Un sistema completo.",
+    s1_title: "Creazione Prodotti Digitali", s1_desc: "Progettiamo e strutturiamo prodotti digitali redditizi calibrati esattamente sui bisogni del tuo pubblico e sulla domanda della tua nicchia.",
+    s2_title: "Configurazione Piattaforma", s2_desc: "Costruiamo e lanciamo il tuo ecosistema completo su Whop — configurato, brandizzato e pronto a generare entrate.",
+    s3_title: "Strategia di Monetizzazione", s3_desc: "Pacchetti offerte, livelli di prezzo e flussi di upsell progettati per massimizzare il valore del cliente nel tempo.",
+    s4_title: "Sistemi di Crescita", s4_desc: "Funnel automatizzati e processi di vendita che lavorano 24/7 — il tuo prodotto scala senza scalare il tuo carico di lavoro.",
+    why_eyebrow: "Perché i Creator Lavorano Con Noi",
+    why_title: "Il tuo lavoro è il contenuto. Il nostro è tutto il resto.",
+    why_body: "La maggior parte dei creator perde mesi a risolvere problemi di tech, prezzi e piattaforme. Noi lo abbiamo già risolto. Tu porti il pubblico — noi portiamo il business.",
+    wi1_title: "Creazione Prodotti", wi1_desc: "Progettiamo prodotti digitali che corrispondono ai bisogni del tuo pubblico e al posizionamento del tuo brand.",
+    wi2_title: "Configurazione Piattaforma", wi2_desc: "Ecosistema Whop completo — configurato, brandizzato e pronto a vendere dal primo giorno.",
+    wi3_title: "Strategia di Monetizzazione", wi3_desc: "Pacchetti offerte, livelli di prezzo e flussi upsell per massimizzare il valore del cliente.",
+    wi4_title: "Infrastruttura Backend", wi4_desc: "Automazioni, funnel e sistemi di consegna che operano 24/7 senza il tuo coinvolgimento.",
+    why_focus: "Il risultato: un business digitale che cresce mentre tu ti concentri su <strong>contenuti e pubblico.</strong>",
+    cta_eyebrow: "Posti Limitati",
+    cta_title: "Pronto a costruire il tuo prodotto digitale?",
+    cta_body: "Lavoriamo con un numero selezionato di creator ogni mese. Se hai un pubblico coinvolto e una visione, candidati — ti risponderemo entro 48 ore.",
+    cta_btn: "Candidati per Partnership",
+    contact_eyebrow: "Contattaci", contact_title: "Scrivici",
+    contact_body: "Parlaci del tuo pubblico e dei tuoi obiettivi. Ti risponderemo entro 24 ore.",
+    form_name: "Il Tuo Nome", form_email: "Indirizzo Gmail", form_msg: "Messaggio",
+    form_send: "Invia Messaggio",
+    form_success_title: "Messaggio Inviato! 🎉", form_success_body: "Ti risponderemo entro 24 ore.",
+    footer_copy: "© 2024 RFX Agency. Tutti i diritti riservati."
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => { if (b.textContent.toLowerCase().includes(lang === 'sl' ? 'slo' : lang)) b.classList.add('active'); });
+  // fix active for EN
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    const t = b.textContent.trim().toUpperCase();
+    if ((lang === 'en' && t === 'EN') || (lang === 'sl' && t === 'SLO') || (lang === 'it' && t === 'ITA')) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+}
+
+// ── CONTACT FORM ──
+function sendMessage() {
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const msg = document.getElementById('fmessage').value.trim();
+  if (!name || !email || !msg) { alert('Please fill in all fields.'); return; }
+
+  // mailto fallback (opens email client to rok@rfxagency.com)
+  const subject = encodeURIComponent(`RFX Agency Contact - ${name}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
+  window.location.href = `mailto:rok@rfxagency.com?subject=${subject}&body=${body}`;
+
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+// Apply default language on load
+setLang('en');
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
