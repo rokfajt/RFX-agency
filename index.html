@@ -547,16 +547,16 @@
       <div class="form-row">
         <div class="form-field">
           <label data-i18n="form_name">Your Name</label>
-          <input type="text" id="fname" placeholder="Creator Name" />
+          <input type="text" id="fname" name="name" placeholder="Creator Name" />
         </div>
         <div class="form-field">
           <label data-i18n="form_email">Gmail Address</label>
-          <input type="email" id="femail" placeholder="you@gmail.com" />
+          <input type="email" id="femail" name="email" placeholder="you@gmail.com" />
         </div>
       </div>
       <div class="form-field">
         <label data-i18n="form_msg">Message</label>
-        <textarea id="fmessage" placeholder="Tell us about your audience, niche, and what you want to build..."></textarea>
+        <textarea id="fmessage" name="message" placeholder="Tell us about your audience, niche, and what you want to build..."></textarea>
       </div>
       <button class="form-submit" onclick="sendMessage()" data-i18n="form_send">Send Message</button>
     </div>
@@ -705,19 +705,35 @@ function setLang(lang) {
 }
  
 // ── CONTACT FORM ──
-function sendMessage() {
+async function sendMessage() {
   const name = document.getElementById('fname').value.trim();
   const email = document.getElementById('femail').value.trim();
   const msg = document.getElementById('fmessage').value.trim();
   if (!name || !email || !msg) { alert('Please fill in all fields.'); return; }
  
-  // mailto fallback (opens email client to rok@rfxagency.com)
-  const subject = encodeURIComponent(`RFX Agency Contact - ${name}`);
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
-  window.location.href = `mailto:rfxagency.office@gmail.com?subject=${subject}&body=${body}`;
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
  
-  document.getElementById('contactForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
+  try {
+    const res = await fetch('https://formspree.io/f/xzdkkobl', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message: msg })
+    });
+    if (res.ok) {
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      alert('Something went wrong. Please try again.');
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    alert('Something went wrong. Please try again.');
+    btn.textContent = 'Send Message';
+    btn.disabled = false;
+  }
 }
  
 // Apply default language on load
