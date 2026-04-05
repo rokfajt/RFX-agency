@@ -17,10 +17,10 @@
     --black: #000000;
     --accent: #1d1d1f;
   }
-
+ 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-
+ 
   body {
     background: var(--white);
     color: var(--charcoal);
@@ -28,7 +28,7 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-
+ 
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -51,7 +51,7 @@
   }
   .nav-center a:hover { color: var(--mid-grey); }
   .nav-right { display: flex; align-items: center; gap: 20px; }
-
+ 
   /* Language Switcher */
   .lang-switcher {
     display: flex; gap: 4px; align-items: center;
@@ -64,7 +64,7 @@
   }
   .lang-btn:hover, .lang-btn.active { color: var(--black); }
   .lang-sep { color: var(--light-grey); font-size: 11px; }
-
+ 
   /* Instagram */
   .ig-link {
     display: flex; align-items: center;
@@ -72,7 +72,7 @@
   }
   .ig-link:hover { opacity: 0.6; }
   .ig-link svg { width: 18px; height: 18px; }
-
+ 
   .nav-apply {
     font-size: 13px; font-weight: 500;
     background: var(--black); color: var(--white);
@@ -81,7 +81,7 @@
     white-space: nowrap;
   }
   .nav-apply:hover { background: #333; }
-
+ 
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
@@ -92,7 +92,7 @@
     padding: 100px 40px 80px;
     position: relative; overflow: hidden;
   }
-
+ 
   /* Subtle gradient orb */
   .hero::before {
     content: '';
@@ -102,7 +102,7 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
-
+ 
   .hero-tag {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
@@ -112,7 +112,7 @@
     margin-bottom: 48px;
     opacity: 0; animation: fadeUp 0.9s 0.1s forwards;
   }
-
+ 
   .hero-name {
     font-weight: 900; letter-spacing: -0.03em;
     color: var(--white); line-height: 0.85;
@@ -132,7 +132,7 @@
     color: rgba(255,255,255,0.35);
     text-transform: uppercase;
   }
-
+ 
   .hero-headline {
     font-size: clamp(20px, 3vw, 34px);
     font-weight: 300; line-height: 1.3;
@@ -140,14 +140,14 @@
     max-width: 680px; margin: 0 auto 24px;
     opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
   }
-
+ 
   .hero-sub {
     font-size: 17px; font-weight: 300; line-height: 1.7;
     color: rgba(255,255,255,0.45);
     max-width: 540px; margin: 0 auto 56px;
     opacity: 0; animation: fadeUp 0.9s 0.45s forwards;
   }
-
+ 
   .hero-cta {
     display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;
     opacity: 0; animation: fadeUp 0.9s 0.55s forwards;
@@ -168,7 +168,7 @@
     text-decoration: none; transition: all 0.25s;
   }
   .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
-
+ 
   .hero-scroll-indicator {
     position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -179,7 +179,7 @@
     background: rgba(255,255,255,0.3);
     animation: scrollBounce 2s infinite;
   }
-
+ 
   /* ── WHAT WE DO ── */
   .what-we-do {
     background: var(--off-white);
@@ -201,7 +201,7 @@
     font-size: 19px; font-weight: 300; line-height: 1.7;
     color: var(--dark-grey); max-width: 620px; margin: 0 auto;
   }
-
+ 
   /* ── SERVICES ── */
   .services {
     background: var(--white);
@@ -209,7 +209,7 @@
   }
   .services-inner { max-width: 1100px; margin: 0 auto; }
   .services-header { text-align: center; margin-bottom: 72px; }
-
+ 
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -217,14 +217,14 @@
     background: var(--light-grey);
     border-radius: 20px; overflow: hidden;
   }
-
+ 
   .service-card {
     background: var(--white);
     padding: 52px 48px;
     transition: background 0.3s;
   }
   .service-card:hover { background: var(--off-white); }
-
+ 
   .service-num {
     font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--mid-grey);
@@ -238,7 +238,7 @@
     font-size: 15px; font-weight: 300; line-height: 1.75;
     color: var(--dark-grey);
   }
-
+ 
   /* ── WHY ── */
   .why {
     background: var(--black);
@@ -250,7 +250,7 @@
   .why .section-eyebrow { color: rgba(255,255,255,0.4); }
   .why .section-title-big { color: var(--white); }
   .why .section-body { color: rgba(255,255,255,0.5); margin-bottom: 72px; }
-
+ 
   .why-list {
     display: grid; grid-template-columns: repeat(2, 1fr);
     gap: 2px; background: rgba(255,255,255,0.07);
@@ -278,13 +278,13 @@
     font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.45);
     line-height: 1.6;
   }
-
+ 
   .why-focus {
     font-size: 20px; font-weight: 300; line-height: 1.75;
     color: rgba(255,255,255,0.5);
   }
   .why-focus strong { color: var(--white); font-weight: 500; }
-
+ 
   /* ── CTA ── */
   .cta-section {
     background: var(--off-white);
@@ -301,7 +301,7 @@
     display: inline-block;
   }
   .btn-black:hover { background: #222; transform: scale(1.03); }
-
+ 
   /* ── CONTACT ── */
   .contact {
     background: var(--white);
@@ -313,7 +313,7 @@
   }
   .contact-inner .section-title-big { font-size: clamp(28px, 4vw, 48px); margin-bottom: 16px; }
   .contact-inner .section-body { margin-bottom: 52px; }
-
+ 
   .contact-form { display: flex; flex-direction: column; gap: 16px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .form-field {
@@ -335,7 +335,7 @@
     border-color: var(--charcoal);
   }
   .form-field textarea { min-height: 120px; }
-
+ 
   .form-submit {
     font-family: inherit; font-size: 15px; font-weight: 500;
     background: var(--black); color: var(--white);
@@ -350,7 +350,7 @@
     border-radius: 16px; color: var(--dark-grey);
   }
   .form-success strong { display: block; font-size: 18px; color: var(--black); margin-bottom: 8px; }
-
+ 
   /* ── FOOTER ── */
   footer {
     background: var(--off-white);
@@ -367,7 +367,7 @@
     font-size: 13px; transition: color 0.2s;
   }
   .footer-ig:hover { color: var(--black); }
-
+ 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -380,7 +380,7 @@
     0%, 100% { transform: translateY(0); opacity: 0.3; }
     50% { transform: translateY(6px); opacity: 1; }
   }
-
+ 
   .reveal {
     opacity: 0; transform: translateY(32px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -390,7 +390,7 @@
   .reveal-d2 { transition-delay: 0.2s; }
   .reveal-d3 { transition-delay: 0.3s; }
   .reveal-d4 { transition-delay: 0.4s; }
-
+ 
   /* ── MOBILE ── */
   @media (max-width: 768px) {
     nav { padding: 0 20px; }
@@ -405,7 +405,7 @@
 </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">RFX</a>
@@ -432,7 +432,7 @@
     <a href="#contact" class="nav-apply" data-i18n="nav_apply">Apply Now</a>
   </div>
 </nav>
-
+ 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-tag" data-i18n="hero_tag">Marketing Agency · Digital Products</div>
@@ -448,14 +448,14 @@
   </div>
   <div class="hero-scroll-indicator"><div class="scroll-dot"></div></div>
 </section>
-
+ 
 <!-- WHAT WE DO -->
 <section class="what-we-do" id="what">
   <p class="section-eyebrow reveal" data-i18n="what_eyebrow">What We Do</p>
   <h2 class="section-title-big reveal reveal-d1" data-i18n="what_title">Audience is your asset.<br>We build the business around it.</h2>
   <p class="section-body reveal reveal-d2" data-i18n="what_body">At RFX Agency, we partner exclusively with creators who have real traction. We design, build and launch their entire digital product operation — from the product itself to the infrastructure and sales systems that make it scale.</p>
 </section>
-
+ 
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="services-inner">
@@ -487,7 +487,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- WHY CREATORS -->
 <section class="why" id="why">
   <div class="why-inner">
@@ -527,7 +527,7 @@
     <p class="why-focus reveal" data-i18n="why_focus">The result: a digital business that grows while you focus on <strong>content and audience.</strong></p>
   </div>
 </section>
-
+ 
 <!-- CTA -->
 <section class="cta-section">
   <p class="section-eyebrow reveal" data-i18n="cta_eyebrow">Limited Spots Available</p>
@@ -536,7 +536,7 @@
   <br><br>
   <a href="#contact" class="btn-black reveal reveal-d3" data-i18n="cta_btn">Apply For Partnership</a>
 </section>
-
+ 
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-inner">
@@ -566,7 +566,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">RFX AGENCY</div>
@@ -580,7 +580,7 @@
     @the_rokfajttt
   </a>
 </footer>
-
+ 
 <script>
 // ── TRANSLATIONS ──
 const translations = {
@@ -684,9 +684,9 @@ const translations = {
     footer_copy: "© 2024 RFX Agency. Tutti i diritti riservati."
   }
 };
-
+ 
 let currentLang = 'en';
-
+ 
 function setLang(lang) {
   currentLang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -703,32 +703,32 @@ function setLang(lang) {
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
 }
-
+ 
 // ── CONTACT FORM ──
 function sendMessage() {
   const name = document.getElementById('fname').value.trim();
   const email = document.getElementById('femail').value.trim();
   const msg = document.getElementById('fmessage').value.trim();
   if (!name || !email || !msg) { alert('Please fill in all fields.'); return; }
-
+ 
   // mailto fallback (opens email client to rok@rfxagency.com)
   const subject = encodeURIComponent(`RFX Agency Contact - ${name}`);
   const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
-  window.location.href = `mailto:rok@rfxagency.com?subject=${subject}&body=${body}`;
-
+  window.location.href = `mailto:rfxagency.office@gmail.com?subject=${subject}&body=${body}`;
+ 
   document.getElementById('contactForm').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
 }
-
+ 
 // Apply default language on load
 setLang('en');
-
+ 
 // ── SCROLL REVEAL ──
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
-
+ 
 </body>
 </html>
